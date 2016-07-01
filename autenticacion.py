@@ -43,8 +43,7 @@ class Autenticador:
                     self.db.commit()
                     return True
             except Exception as e:
-                print("crear_usuario() -> Ocurrio un error: (" + str(e) + ")")
-                return False
+                raise ErrorEliminarUsuario
         else:
             raise ErrorEliminarUsuario
 
