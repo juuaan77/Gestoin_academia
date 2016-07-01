@@ -16,11 +16,11 @@ def agregar_nivel(db,nivel,porcentaje_docente):
           (Nivel,Porcentaje_docente)\
           VALUES(?,?)",(nivel,porcentaje_docente,))
         print("El nivel se inserto correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al insertar un nivel, en el metodo agregar_nivel -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_nivel(db,key):
 
@@ -53,11 +53,11 @@ def actualizo_nivel(db,key,nivel):
     try:
         cursor.execute("UPDATE nivel set nivel=? where ID_niveles=?", (nivel,key,))
         print("El nivel se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar nivel, en el metodo actualizo_nivel -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_porcentaje_docente(db,key,porcentaje_docente):
     # Primero obtengo el cursor de la db
@@ -71,11 +71,11 @@ def actualizo_porcentaje_docente(db,key,porcentaje_docente):
     try:
         cursor.execute("UPDATE nivel set Porcentaje_docente=? where ID_niveles=?", (porcentaje_docente,key,))
         print("El porcentaje para el docente se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar el porcentaje para el docente, en el metodo actualizo_porcentaje_docente -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

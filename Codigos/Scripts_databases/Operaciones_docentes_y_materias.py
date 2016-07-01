@@ -6,6 +6,8 @@ def agregar_docente_y_materia(db,id_materia,id_docente):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_docente_y_materia ->"+str(e))
 
@@ -15,11 +17,11 @@ def agregar_docente_y_materia(db,id_materia,id_docente):
           (id_mat,id_doc)\
           VALUES(?,?)",(id_materia,id_docente ,))
         print("El docente y la materia se inserto correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al insertar docente y la materia, en el metodo agregar_docente_y_materia -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_docente_y_materia(db,key):
 
@@ -27,6 +29,8 @@ def eliminar_docente_y_materia(db,key):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo eliminar_docente_y_materia ->" + str(e))
 
@@ -34,11 +38,11 @@ def eliminar_docente_y_materia(db,key):
     try:
         cursor.execute("DELETE FROM docentes_y_materias where ID_doc_mat=?",(key,))
         print("El docente y materia se elimino correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al eliminar un docente y materia, en el metodo eliminar_docente_y_materia -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

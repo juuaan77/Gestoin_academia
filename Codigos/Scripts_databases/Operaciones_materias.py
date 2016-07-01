@@ -7,6 +7,8 @@ def agregar_materia(db,materia,id_nivel):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_materia ->"+str(e))
 
@@ -16,11 +18,11 @@ def agregar_materia(db,materia,id_nivel):
           (materia,ID_nivel)\
           VALUES(?,?)",(materia,id_nivel,))
         print("La materia se inserto correctamente")
+        db.commit()
     except Exception as e:
         print("Error al insertar una materia, en el metodo agregar_materia -> " + str(e))
 
     #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_materia(db,key):
 
@@ -28,6 +30,8 @@ def eliminar_materia(db,key):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo eliminar_materia ->" + str(e))
 
@@ -35,17 +39,18 @@ def eliminar_materia(db,key):
     try:
         cursor.execute("DELETE FROM materias where ID_materias=?",(key,))
         print("El materia se elimino correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al eliminar una materia, en el metodo eliminar_materia -> " + str(e))
-
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_materia_y_nivel(db,key,materia,id_nivel):
     # Primero obtengo el cursor de la db
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo actualizo_materia_y_nivel ->" + str(e))
 
@@ -54,11 +59,11 @@ def actualizo_materia_y_nivel(db,key,materia,id_nivel):
         cursor.execute("UPDATE materias set materia=?, ID_nivel=? where ID_materias=?",\
                        (materia,id_nivel,key,))
         print("La Materia se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar la materia, en el metodo actualizo_materia_y_nivel -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

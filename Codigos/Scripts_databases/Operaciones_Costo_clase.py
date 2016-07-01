@@ -7,6 +7,8 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_costo ->"+str(e))
 
@@ -16,11 +18,11 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
           (ID_cant_clas,particular,costo_total)\
           VALUES(?,?,?)",(id_cant_clases,particular,costo_total,))
         print("El costo se inserto correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al insertar el costo, en el metodo agregar_costo -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_costo(db,key):
 
@@ -28,6 +30,8 @@ def eliminar_costo(db,key):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo eliminar_costo ->" + str(e))
 
@@ -35,17 +39,19 @@ def eliminar_costo(db,key):
     try:
         cursor.execute("DELETE FROM costo_clase where ID_costo_clase=?",(key,))
         print("El costo se elimino correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al eliminar un costo, en el metodo eliminar_costo -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_costo(db,key,costo,):
     # Primero obtengo el cursor de la db
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo actualizo_costo ->" + str(e))
 
@@ -54,11 +60,11 @@ def actualizo_costo(db,key,costo,):
         cursor.execute("UPDATE costo_clase set costo_total=? where ID_costo_clase=?",\
                        (costo,key,))
         print("El costo se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar un costo, en el metodo actualizo_costo -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

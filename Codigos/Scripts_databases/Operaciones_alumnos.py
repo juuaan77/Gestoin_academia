@@ -19,11 +19,11 @@ def agregar_alumno(db,nombre_y_apellido,fecha_nacimiento,dni,email,telefono):
           (Nombre_y_Apellido, fecha_nacimiento, DNI, Email, Telefono)\
           VALUES(?,?,?,?,?)",valores)
         print("El alumno se inserto correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al insertar un alumno, en el metodo agregar_alumno -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_alumno(db,key):
 
@@ -38,11 +38,11 @@ def eliminar_alumno(db,key):
     try:
         cursor.execute("DELETE FROM alumnos where ID_alumnos=?",(key,))
         print("El alumno se elimino correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al eliminar un alumno, en el metodo eliminar_alumno -> " + str(e))
 
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_email_alumno(db,key,email):
     # Primero obtengo el cursor de la db
@@ -56,11 +56,11 @@ def actualizo_email_alumno(db,key,email):
     try:
         cursor.execute("UPDATE alumnos set email=? where ID_alumnos=?", (email,key,))
         print("El email del alumno se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar el email de un alumno, en el metodo actualizo_email_alumno -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_telefono_alumno(db,key,telefono):
     # Primero obtengo el cursor de la db
@@ -74,11 +74,11 @@ def actualizo_telefono_alumno(db,key,telefono):
     try:
         cursor.execute("UPDATE alumnos set telefono=? where ID_alumnos=?", (telefono,key,))
         print("El telefono del alumno se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar el telefono de un alumno, en el metodo actualizo_telefono_alumno -> " + str(e))
 
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

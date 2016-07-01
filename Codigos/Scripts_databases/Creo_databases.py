@@ -190,6 +190,7 @@ try:
     cursor.execute("create table alumnos_y_clases\
     (ID_alumnos_y_clases INTEGER PRIMARY KEY AUTOINCREMENT,\
     ID_alumno int references alumnos(ID_alumnos),\
+    ID_clase int references clases(ID_clases),\
     asistio boolean)")
 
     print("La tabla alumnos_y_clases fue creada correctamente")

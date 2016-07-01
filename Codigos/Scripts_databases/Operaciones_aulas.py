@@ -16,11 +16,10 @@ def agregar_aula(db,nombre,club_de_la_tarea):
           (nombre,club_de_la_tarea)\
           VALUES(?,?)",(nombre,club_de_la_tarea ,))
         print("El aula se inserto correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al insertar aula, en el metodo agregar_aula -> " + str(e))
-
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def eliminar_aula(db,key):
 
@@ -35,11 +34,10 @@ def eliminar_aula(db,key):
     try:
         cursor.execute("DELETE FROM aulas where ID_aulas=?",(key,))
         print("El aula se elimino correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al eliminar un aula, en el metodo eliminar_aula -> " + str(e))
-
-    #Comiteo los cambios a la base de datos.
-    db.commit()
 
 def actualizo_aula_y_club_de_la_tarea(db,key,nombre,club_de_la_tarea):
     # Primero obtengo el cursor de la db
@@ -54,11 +52,10 @@ def actualizo_aula_y_club_de_la_tarea(db,key,nombre,club_de_la_tarea):
         cursor.execute("UPDATE aulas set nombre=?, club_de_la_tarea=? where ID_aulas=?",\
                        (nombre,club_de_la_tarea,key,))
         print("El aula se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
     except Exception as e:
         print("Error al actualizar un aula, en el metodo actualizo_aula_y_club_de_la_tarea -> " + str(e))
-
-    # Comiteo los cambios a la base de datos.
-    db.commit()
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')
