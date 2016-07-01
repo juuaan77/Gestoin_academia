@@ -69,6 +69,11 @@ class Autenticador:
         except Exception as e:
             raise ErrorAutenticacion
 
+    def desautenticar(self):
+        self.autenticado = False
+        self.user = None
+        self.privilegios = None
+
     def cambiar_clave(self, new_password):
         if len(new_password) < 8:
                 raise ErrorLongitudClave
