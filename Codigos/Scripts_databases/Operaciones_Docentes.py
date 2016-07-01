@@ -81,9 +81,8 @@ def actualizo_telefono_docente(db,key,telefono):
     db.commit()
 
 if __name__ == "__main__":
-    database = sqlite3.connect('C:\\Users\\JuanNotebook\\Documents\\GitHub\\Gestoin_academia\\Databases\\Academia.db')
-
-    #agregar_docente(database,"juan arese","el 18 de agosto",36935267,"juan_arese@hotmail.com","3564524759")
+    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
+    agregar_docente(database,"juan arese","el 18 de agosto",36935267,"juan_arese@hotmail.com","3564524759")
     #eliminar_docente(database,1)
     #actualizo_email_docente(database,1,"fruta")
     #actualizo_telefono_docente(database,1,6667)

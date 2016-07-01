@@ -33,7 +33,7 @@ def eliminar_materia(db,key):
 
     #Elimino el alumno correspondiente a la key dada.
     try:
-        cursor.execute("DELETE FROM materias where ID_materia=?",(key,))
+        cursor.execute("DELETE FROM materias where ID_materias=?",(key,))
         print("El materia se elimino correctamente")
     except Exception as e:
         print("Error al eliminar una materia, en el metodo eliminar_materia -> " + str(e))
@@ -51,7 +51,7 @@ def actualizo_materia_y_nivel(db,key,materia,id_nivel):
 
     # Actualizo el email del alumno correspondiente a la key dada.
     try:
-        cursor.execute("UPDATE materias set materia=?, ID_nivel=? where ID_materia=?",\
+        cursor.execute("UPDATE materias set materia=?, ID_nivel=? where ID_materias=?",\
                        (materia,id_nivel,key,))
         print("La Materia se actualizo correctamente")
     except Exception as e:
@@ -61,9 +61,8 @@ def actualizo_materia_y_nivel(db,key,materia,id_nivel):
     db.commit()
 
 if __name__ == "__main__":
-    database = sqlite3.connect('C:\\Users\\JuanNotebook\\Documents\\GitHub\\Gestoin_academia\\Databases\\Academia.db')
-
-    #agregar_materia(database,"fisica",2)
+    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
+    agregar_materia(database,"fisica",2)
     #agregar_materia(database, "matematicas", 2)
     #eliminar_materia(database,1)
     #actualizo_materia_y_nivel(database,2,"geografia",2)

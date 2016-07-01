@@ -61,10 +61,10 @@ def actualizo_aula_y_club_de_la_tarea(db,key,nombre,club_de_la_tarea):
     db.commit()
 
 if __name__ == "__main__":
-    database = sqlite3.connect('C:\\Users\\JuanNotebook\\Documents\\GitHub\\Gestoin_academia\\Databases\\Academia.db')
+    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
 
     #agregar_aula(database,"aula1",False)
     #agregar_aula(database,"cocina",True)
     #eliminar_aula(database,1)
-    actualizo_aula_y_club_de_la_tarea(database,2,"fonoaudiologia",False)
+    #actualizo_aula_y_club_de_la_tarea(database,2,"fonoaudiologia",False)
     database.close()

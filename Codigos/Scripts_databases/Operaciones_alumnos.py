@@ -81,7 +81,7 @@ def actualizo_telefono_alumno(db,key,telefono):
     db.commit()
 
 if __name__ == "__main__":
-    database = sqlite3.connect('C:\\Users\\JuanNotebook\\Documents\\GitHub\\Gestoin_academia\\Databases\\Academia.db')
+    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
 
     #agregar_alumno(database,"juan arese","some day",36935267,"juan_arese@hotmail.com","3564524759")
     #eliminar_alumno(database,3)

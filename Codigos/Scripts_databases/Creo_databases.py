@@ -25,6 +25,19 @@ except sqlite3.OperationalError as e:
         print(e)
         exit()
 
+#ahora que la base esta creada, creo el usuario root
+try:
+    cursor.execute("INSERT INTO Usuarios\
+      (username,password,privilegios)\
+      VALUES('root','4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2',1)")
+    print("El usuairo root se inserto correctamente")
+    database.commit()
+except Exception as e:
+    print("Error al crear el usuario root, en el modulo creo_databases -> " + str(e))
+
+    #Comiteo los cambios a la base de datos.
+    database.commit()
+
 #Creo las tablas. Primero la tabla de los alumnos
 try:
     cursor.execute("create table Alumnos\
@@ -65,7 +78,8 @@ except sqlite3.OperationalError as e:
 try:
     cursor.execute("create table Nivel\
       (ID_niveles INTEGER PRIMARY KEY AUTOINCREMENT,\
-      Nivel TEXT not null)")
+      Nivel TEXT not null,\
+      Porcentaje_docente int)")
 
     print("La tabla Nivel fue creada correctamente")
 except sqlite3.OperationalError as e:
@@ -78,7 +92,7 @@ except sqlite3.OperationalError as e:
 # Ahora creo la tabla de las materias.
 try:
     cursor.execute("create table Materias\
-      (ID_materia INTEGER PRIMARY KEY AUTOINCREMENT,\
+      (ID_materias INTEGER PRIMARY KEY AUTOINCREMENT,\
       Materia TEXT not null,\
       ID_nivel int,\
       FOREIGN KEY(ID_nivel) REFERENCES Nivel(ID_niveles))")
@@ -111,7 +125,7 @@ except sqlite3.OperationalError as e:
 try:
     cursor.execute("create table Docentes_y_Materias\
       (ID_doc_mat INTEGER PRIMARY KEY AUTOINCREMENT,\
-      ID_mat int references Materias(ID_materia),\
+      ID_mat int references Materias(ID_materias),\
       ID_doc int references Docentes(ID_docentes))")
 
     print("La tabla Docentes_y_Materias fue creada correctamente")
@@ -151,4 +165,37 @@ except sqlite3.OperationalError as e:
         print("La tabla Costo_clase ya estaba creada")
     else:
         print("No se pudo crear la tabla Costo_clase")
+        exit()
+
+# Ahora creo la tabla de las clases.
+try:
+    cursor.execute("create table clases\
+    (ID_clases INTEGER PRIMARY KEY AUTOINCREMENT,\
+    ID_docente int references docentes(ID_docentes),\
+    ID_materia int references materias(ID_materias),\
+    ID_aula int references aulas(ID_aulas),\
+    reprogramo boolean,\
+    horario char(50))")
+
+    print("La tabla clases fue creada correctamente")
+except sqlite3.OperationalError as e:
+    if str(e) == "table clases already exists":
+        print("La tabla clases ya estaba creada")
+    else:
+        print("No se pudo crear la tabla clases")
+        exit()
+
+# Ahora creo la tabla de las alumnos_y_clases.
+try:
+    cursor.execute("create table alumnos_y_clases\
+    (ID_alumnos_y_clases INTEGER PRIMARY KEY AUTOINCREMENT,\
+    ID_alumno int references alumnos(ID_alumnos),\
+    asistio boolean)")
+
+    print("La tabla alumnos_y_clases fue creada correctamente")
+except sqlite3.OperationalError as e:
+    if str(e) == "table alumnos_y_clases already exists":
+        print("La tabla alumnos_y_clases ya estaba creada")
+    else:
+        print("No se pudo alumnos_y_clases la tabla clases")
         exit()
