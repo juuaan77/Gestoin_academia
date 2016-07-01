@@ -86,7 +86,7 @@ if __name__ == "__main__":
     #agregar_alumno(database,"juan arese","some day",36935267,"juan_arese@hotmail.com","3564524759")
     #eliminar_alumno(database,3)
     #actualizo_email_alumno(database,1,"fruta@masfruta.com")
-    actualizo_telefono_alumno(database,1,555)
+    #actualizo_telefono_alumno(database,1,555)
     database.close()
 
 

@@ -2,7 +2,7 @@ import sqlite3
 
 
 #Primero creo la base de datos.
-database = sqlite3.connect('C:\\Users\\JuanNotebook\\Documents\\GitHub\\Gestoin_academia\\Databases\\Academia.db')
+database = sqlite3.connect('..\\..\\Databases\\Academia.db')
 
 cursor = database.cursor()
 
