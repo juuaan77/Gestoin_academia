@@ -2,9 +2,9 @@ import unittest
 import sqlite3
 import os
 
-from autenticacion import Autenticador
-from autenticacion import ErrorFormatoClave
-from autenticacion import ErrorEliminarUsuario
+from Codigos.Autenticacion.autenticacion import Autenticador
+from Codigos.Autenticacion.autenticacion import ErrorFormatoClave
+from Codigos.Autenticacion.autenticacion import ErrorEliminarUsuario
 
 
 class AutenticacionTests(unittest.TestCase):

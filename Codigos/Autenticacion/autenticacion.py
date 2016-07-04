@@ -1,4 +1,5 @@
-import hashlib
+from .funciones_password import crear_hash
+from .funciones_password import clave_valida
 
 
 class Autenticador:
@@ -13,11 +14,11 @@ class Autenticador:
     def crear_usuario(self, user, password, privilegios=3):
         if self.autenticado and self.privilegios == 1:
             # Checkear longitud de la clave
-            if len(password) < 8:
-                raise ErrorLongitudClave
+            if not clave_valida(password):
+                raise ErrorFormatoClave
 
             # Crear hash del password
-            password_hash = self.crear_hash(password)
+            password_hash = crear_hash(password)
 
             # Crear sql query
             query = "INSERT INTO usuarios(username, password, privilegios) values('{}', '{}', {})".format(user,
@@ -54,10 +55,10 @@ class Autenticador:
             self.cursor.execute(query)
 
             datos = self.cursor.fetchone()
-            stored_hash = datos[1]
-            privilegios = datos[2]
+            stored_hash = datos[2]
+            privilegios = datos[3]
 
-            password_hash = self.crear_hash(password)
+            password_hash = crear_hash(password)
 
             if stored_hash == password_hash:
                 self.autenticado = True
@@ -75,10 +76,10 @@ class Autenticador:
         self.privilegios = None
 
     def cambiar_clave(self, new_password):
-        if len(new_password) < 8:
-                raise ErrorLongitudClave
+        if not clave_valida(new_password):
+            raise ErrorFormatoClave
 
-        new_hashed_password = self.crear_hash(new_password)
+        new_hashed_password = crear_hash(new_password)
 
         if self.autenticado:
             query = "UPDATE usuarios SET password = '{}'" \
@@ -92,13 +93,6 @@ class Autenticador:
                 raise ErrorCambiarClave
         else:
             raise ErrorAutenticacionPrivilegios
-
-    def crear_hash(self, password):
-        m = hashlib.sha256()
-        m.update(password.encode())
-        password_hash = m.hexdigest()
-
-        return password_hash
 
 
 class ErrorAutenticacion(Exception):
@@ -126,6 +120,6 @@ class ErrorCambiarClave(Exception):
         return "No se pudo cambiar la clave."
 
 
-class ErrorLongitudClave(Exception):
+class ErrorFormatoClave(Exception):
     def __str__(self):
-        return "Clave demasiado corta, verifique que contenga al menos ocho caracteres."
+        return "Clave no válida, verifique que contenga al menos ocho caracteres, mayúscula, minúscula y número."
