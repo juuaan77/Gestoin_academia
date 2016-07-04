@@ -1,5 +1,3 @@
-import re
-import hashlib
 from .funciones_password import crear_hash
 from .funciones_password import clave_valida
 
