@@ -61,8 +61,7 @@ class Autenticador:
             privilegios = datos[3]
 
             password_hash = crear_hash(password)
-            print(password_hash)
-            print(stored_hash)
+
             if stored_hash == password_hash:
                 self.autenticado = True
                 self.user = user
