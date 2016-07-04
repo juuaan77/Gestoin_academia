@@ -1,23 +1,19 @@
 import sqlite3
+from Operaciones_generales import obtengo_cursor
 
-def agregar_docente(db,nombre_y_apellido,fecha_nacimiento,dni,email,telefono):
+def agregar_docente(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
 
-    #Primero obtengo el cursor de la db
-
-    try:
-        cursor = db.cursor()
-        print("la base de datos se abrio correctamente")
-    except Exception as e:
-        print("Error al abrir la base de datos, en el metodo agregar_docente ->"+str(e))
+    ##Primero obtengo el cursor de la db
+    cursor = obtengo_cursor(db)
 
     #Genero un arreglo con los datos a insertar
-    valores = [nombre_y_apellido,fecha_nacimiento,dni,email,telefono]
+    valores = [nombre,apellido,fecha_nacimiento,dni,email,telefono]
 
     #Inserto un nuevo docente con los parametros dados.
     try:
         cursor.execute("INSERT INTO docentes\
           (Nombre_y_Apellido, fecha_nacimiento, DNI, Email, Telefono)\
-          VALUES(?,?,?,?,?)",valores)
+          VALUES(?,?,?,?,?,?)",valores)
         print("El docente se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -25,13 +21,8 @@ def agregar_docente(db,nombre_y_apellido,fecha_nacimiento,dni,email,telefono):
         print("Error al insertar un docente, en el metodo agregar_docente -> " + str(e))
 
 def eliminar_docente(db,key):
-
     # Primero obtengo el cursor de la db
-    try:
-        cursor = db.cursor()
-        print("la base de datos se abrio correctamente")
-    except Exception as e:
-        print("Error al abrir la base de datos, en el metodo eliminar_docente ->" + str(e))
+    cursor = obtengo_cursor(db)
 
     #Elimino el alumno correspondiente a la key dada.
     try:
@@ -45,11 +36,7 @@ def eliminar_docente(db,key):
 
 def actualizo_email_docente(db,key,email):
     # Primero obtengo el cursor de la db
-    try:
-        cursor = db.cursor()
-        print("la base de datos se abrio correctamente")
-    except Exception as e:
-        print("Error al abrir la base de datos, en el metodo actualizo_email_docente ->" + str(e))
+    cursor = obtengo_cursor(db)
 
     # Actualizo el email del alumno correspondiente a la key dada.
     try:
@@ -63,11 +50,7 @@ def actualizo_email_docente(db,key,email):
 
 def actualizo_telefono_docente(db,key,telefono):
     # Primero obtengo el cursor de la db
-    try:
-        cursor = db.cursor()
-        print("la base de datos se abrio correctamente")
-    except Exception as e:
-        print("Error al abrir la base de datos, en el metodo actualizo_telefono_docente ->" + str(e))
+    cursor = obtengo_cursor(db)
 
     # Actualizo el email del alumno correspondiente a la key dada.
     try:
@@ -78,6 +61,39 @@ def actualizo_telefono_docente(db,key,telefono):
     except Exception as e:
         print("Error al actualizar el telefono de un docente, en el metodo actualizo_telefono_docente -> " + str(e))
 
+def obtener_docente_por_nombre(db,apellido):
+    # Primero obtengo el cursor de la db
+    cursor = obtengo_cursor(db)
+    try:
+        cursor.execute("select *\
+            from docente\
+           where apellido='{}'".format(apellido))
+
+        docentes=[]
+        for i in cursor:
+            docentes.append(i)
+
+        return docentes
+
+    except Exception as e:
+        print("Error al obtener alumnos por apellidos -> " + str(e))
+
+def obtener_docente_por_dni(db,dni):
+    # Primero obtengo el cursor de la db
+    cursor = obtengo_cursor(db)
+    try:
+        cursor.execute("select *\
+            from docentes\
+           where dni='{}'".format(dni))
+
+        docentes=[]
+        for i in cursor:
+            docentes.append(i)
+
+        return docentes
+
+    except Exception as e:
+        print("Error al obtener alumnos por apellidos -> " + str(e))
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

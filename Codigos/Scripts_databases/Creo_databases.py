@@ -44,7 +44,8 @@ def Creo_databases():
     try:
         cursor.execute("create table Alumnos\
           (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Nombre_y_Apellido TEXT not null,\
+          Nombre TEXT not null,\
+          Apellido TEXT not null,\
           Fecha_nacimiento char(50),\
           DNI int not null,\
           Email char(50),\
@@ -61,7 +62,8 @@ def Creo_databases():
     try:
         cursor.execute("create table Docentes\
           (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Nombre_y_Apellido TEXT not null,\
+           Nombre TEXT not null,\
+          Apellido TEXT not null,\
           Fecha_nacimiento char(50),\
           DNI int not null,\
           Email char(50),\
@@ -192,3 +194,5 @@ def Creo_databases():
         else:
             raise ErrorCrearTabla
 
+if __name__ == "__main__":
+    Creo_databases()

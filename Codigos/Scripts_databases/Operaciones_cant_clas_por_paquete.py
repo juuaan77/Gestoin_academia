@@ -59,7 +59,6 @@ def actualizo_paquete(db,key,cantidad):
     except Exception as e:
         print("Error al actualizar un paquete, en el metodo actualizo_paquete -> " + str(e))
 
-
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')
     #agregar_paquete(database,1)

@@ -103,7 +103,6 @@ def actualizo_costo_clase(db,key,id_costo_clase):
     except Exception as e:
         print("Error al actualizar el costo de la clase, en el metodo actualizo_costo_clase -> " + str(e))
 
-
 def actualizo_reprogramo(db,key,horario):
     # Primero obtengo el cursor de la db
     try:
