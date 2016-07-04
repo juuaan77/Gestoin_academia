@@ -157,7 +157,8 @@ try:
     (ID_costo_clase INTEGER PRIMARY KEY AUTOINCREMENT,\
     ID_cant_clas int references Cant_clas_por_paquete(ID_cant_clas_por_paquete),\
     particular boolean not null,\
-    costo_total int)")
+    costo_total int,\
+    costo_unitario int)")
 
     print("La tabla Costo_clase fue creada correctamente")
 except sqlite3.OperationalError as e:
@@ -174,6 +175,7 @@ try:
     ID_docente int references docentes(ID_docentes),\
     ID_materia int references materias(ID_materias),\
     ID_aula int references aulas(ID_aulas),\
+    ID_costo_clases int REFERENCES costo_clase(ID_costo_clase),\
     reprogramo boolean,\
     horario char(50))")
 

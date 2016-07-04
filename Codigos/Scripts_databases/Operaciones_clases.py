@@ -1,6 +1,6 @@
 import sqlite3
 
-def agregar_clase(db,id_docente,id_materia,id_aula,reprogramo,horario):
+def agregar_clase(db,id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario):
 
     #Primero obtengo el cursor de la db
 
@@ -16,7 +16,7 @@ def agregar_clase(db,id_docente,id_materia,id_aula,reprogramo,horario):
     try:
         cursor.execute("INSERT INTO clases\
           (id_docente,id_materia,id_aula,reprogramo,horario)\
-          VALUES(?,?,?,?,?)",(id_docente,id_materia,id_aula,reprogramo,horario,))
+          VALUES(?,?,?,?,?,?)",(id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario,))
         print("La clase se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -82,6 +82,27 @@ def actualizo_aula_de_clase(db,key,id_aula):
         db.commit()
     except Exception as e:
         print("Error al actualizar el aula de la clase, en el metodo actualizo_aula_de_clase -> " + str(e))
+
+def actualizo_costo_clase(db,key,id_costo_clase):
+    # Primero obtengo el cursor de la db
+    try:
+        cursor = db.cursor()
+        print("la base de datos se abrio correctamente")
+        cursor.execute("PRAGMA foreign_keys = ON")
+        db.commit()
+    except Exception as e:
+        print("Error al abrir la base de datos, en el metodo actualizo_costo_clase ->" + str(e))
+
+    # Actualizo el email del alumno correspondiente a la key dada.
+    try:
+        cursor.execute("UPDATE clases set id_costo_clases=? where ID_clases=?",\
+                       (id_costo_clase,key,))
+        print("El costo de la clase se actualizo correctamente")
+        # Comiteo los cambios a la base de datos.
+        db.commit()
+    except Exception as e:
+        print("Error al actualizar el costo de la clase, en el metodo actualizo_costo_clase -> " + str(e))
+
 
 def actualizo_reprogramo(db,key,horario):
     # Primero obtengo el cursor de la db
