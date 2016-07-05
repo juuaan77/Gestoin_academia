@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 class ErrorCrearTabla(Exception):
     def __str__(self):
@@ -6,26 +6,34 @@ class ErrorCrearTabla(Exception):
 
 def Creo_databases():
     #Primero creo la base de datos.
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-
+    database = mysql.connector.connect(user='root',password='root',host='127.0.0.1')
     cursor = database.cursor()
+    print("Conexion exitosa al servidor de base de datos")
 
-    print (u"la base de datos se creo correctamente")
+    try:
+        cursor.execute("CREATE DATABASE academia")
+    except Exception as e:
+        if str(e.args[0]) == str(1007):
+            print("La base de datos academia ya estaba creada")
+        else:
+            print(e)
 
+    cursor.execute("use academia")
+    print("conexion a la base de datos academia exitosa")
     #Primero creo la tabla de usuarios.
     try:
         cursor.execute("create table Usuarios\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          username TEXT NOT NULL UNIQUE,\
-          password TEXT NOT NULL,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          username VARCHAR(100) NOT NULL UNIQUE,\
+          password VARCHAR(100) NOT NULL,\
           privilegios INTEGER NOT NULL)")
 
         print("La tabla Usuarios fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Usuarios already exists":
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
             print("La tabla Usuarios ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     #ahora que la base esta creada, creo el usuario root
     try:
@@ -35,164 +43,166 @@ def Creo_databases():
         print("El usuairo root se inserto correctamente")
         database.commit()
     except Exception as e:
-        print("Error al crear el usuario root, en el modulo creo_databases -> " + str(e))
+        if str(e.args[0]) == str(1062):
+            print("El usuario root ya esta creado")
+        else:
+            print(e)
 
-        #Comiteo los cambios a la base de datos.
-        database.commit()
+
 
     #Creo las tablas. Primero la tabla de los alumnos
     try:
         cursor.execute("create table Alumnos\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Nombre TEXT not null,\
-          Apellido TEXT not null,\
-          Fecha_nacimiento char(50),\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          Nombre VARCHAR(100) not null,\
+          Apellido VARCHAR(100) not null,\
+          Fecha_nacimiento VARCHAR(100),\
           DNI int not null,\
-          Email char(50),\
-          Telefono char(50))")
+          Email VARCHAR(100),\
+          Telefono VARCHAR(100))")
 
         print("La tabla Alumnos fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Alumnos already exists":
-            print("La tabla Alumnos ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla alumnos ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     #Ahora creo la tabla de los docentes.
     try:
         cursor.execute("create table Docentes\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-           Nombre TEXT not null,\
-          Apellido TEXT not null,\
-          Fecha_nacimiento char(50),\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+           Nombre VARCHAR(100) not null,\
+          Apellido VARCHAR(100) not null,\
+          Fecha_nacimiento VARCHAR(100),\
           DNI int not null,\
-          Email char(50),\
-          Telefono char(50))")
+          Email VARCHAR(100),\
+          Telefono VARCHAR(100))")
 
         print("La tabla Docentes fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Docentes already exists":
-            print("La tabla Docentes ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla docentes ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de los Niveles.
     try:
         cursor.execute("create table Nivel\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Nivel TEXT not null,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          Nivel VARCHAR(100) not null,\
           Porcentaje_docente int)")
 
         print("La tabla Nivel fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Nivel already exists":
-            print("La tabla Nivel ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla Niveles ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las materias.
     try:
         cursor.execute("create table Materias\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Materia TEXT not null,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          Materia VARCHAR(100) not null,\
           ID_nivel int REFERENCES Nivel(ID))")
 
         print("La tabla Materias fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Materias already exists":
-            print("La tabla Materias ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla materias ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las Aulas.
     try:
         cursor.execute("create table Aulas\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-          Nombre TEXT not null,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          Nombre VARCHAR(100) not null,\
            CLub_de_la_Tarea boolean not null)")
 
         print("La tabla Aulas fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Aulas already exists":
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
             print("La tabla Aulas ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las Docentes-Materias.
     try:
         cursor.execute("create table Docentes_y_Materias\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
           ID_mat int references Materias(ID),\
           ID_doc int references Docentes(ID))")
 
         print("La tabla Docentes_y_Materias fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Docentes_y_Materias already exists":
-            print("La tabla Docentes_y_Materias ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla Docentes-Materias ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las Cantidad de clases en el paquete.
     try:
         cursor.execute("create table Cant_clas_por_paquete\
-          (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
           cantidad int)")
 
         print("La tabla Cant_clas_por_paquete fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Cant_clas_por_paquete already exists":
-            print("La tabla Cant_clas_por_paquete ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla Cantidad de clases en el paquete ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de los costos de las clases.
     try:
         cursor.execute("create table Costo_clase\
-        (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+        (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
         ID_cant_clas int references Cant_clas_por_paquete(ID),\
         particular boolean not null,\
         costo_total int,\
         costo_unitario int)")
 
         print("La tabla Costo_clase fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table Costo_clase already exists":
-            print("La tabla Costo_clase ya estaba creada")
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
+            print("La tabla costos de las clases ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las clases.
     try:
         cursor.execute("create table clases\
-        (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+        (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
         ID_docente int references docentes(ID),\
         ID_materia int references materias(ID),\
         ID_aula int references aulas(ID),\
         ID_costo_clases int REFERENCES costo_clase(ID),\
         reprogramo boolean,\
-        horario char(50))")
+        horario VARCHAR(100))")
 
         print("La tabla clases fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table clases already exists":
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
             print("La tabla clases ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
     # Ahora creo la tabla de las alumnos_y_clases.
     try:
         cursor.execute("create table alumnos_y_clases\
-        (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+        (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
         ID_alumno int references alumnos(ID),\
         ID_clase int references clases(ID),\
         asistio boolean)")
 
         print("La tabla alumnos_y_clases fue creada correctamente")
-    except sqlite3.OperationalError as e:
-        if str(e) == "table alumnos_y_clases already exists":
+    except Exception as e:
+        if str(e.args[0]) == str(1050):
             print("La tabla alumnos_y_clases ya estaba creada")
         else:
-            raise ErrorCrearTabla
+            print(e)
 
 if __name__ == "__main__":
     Creo_databases()

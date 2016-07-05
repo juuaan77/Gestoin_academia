@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_alumno_y_clase(db,id_alumno,id_clase):
 

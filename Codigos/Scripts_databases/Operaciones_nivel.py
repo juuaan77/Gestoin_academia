@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_nivel(db,nivel,porcentaje_docente):
 

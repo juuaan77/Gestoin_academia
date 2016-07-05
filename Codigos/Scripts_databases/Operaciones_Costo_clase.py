@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_costo(db,id_cant_clases,particular,costo_total):
 

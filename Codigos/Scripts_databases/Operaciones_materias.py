@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_materia(db,materia,id_nivel):
 

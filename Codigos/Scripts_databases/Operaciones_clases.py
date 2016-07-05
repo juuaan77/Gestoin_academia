@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_clase(db,id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario):
 

@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 from Operaciones_generales import obtengo_cursor
 
 def agregar_alumno(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):

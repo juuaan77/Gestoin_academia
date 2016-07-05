@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def obtengo_cursor(db):
     try:
@@ -62,6 +62,5 @@ class ErrorEliminarFila(Exception):
         return "No se pudo eliminar la fila, revise los parametros."
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    actualizo_atributo(database,1,"alumnos","apellido","bernard")
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

@@ -1,4 +1,4 @@
-import sqlite3
+import mysql.connector
 
 def agregar_aula(db,nombre,club_de_la_tarea):
 
