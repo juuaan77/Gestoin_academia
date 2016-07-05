@@ -49,7 +49,7 @@ class Autenticador:
             raise ErrorEliminarUsuario
 
     def autenticar(self, user, password):
-        query = "SELECT * FROM usuarios WHERE username == '{}'".format(user)
+        query = "SELECT * FROM usuarios WHERE username = '{}'".format(user)
 
         try:
             self.cursor.execute(query)
