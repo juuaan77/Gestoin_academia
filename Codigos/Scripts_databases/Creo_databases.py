@@ -63,7 +63,7 @@ def crear_tabla_alumnos(db):
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
           nombre VARCHAR(100) NOT NULL,\
           apellido VARCHAR(100) NOT NULL,\
-          fecha_nacimiento DATE NOT NULL),\
+          fecha_nacimiento DATE NOT NULL,\
           dni INTEGER NOT NULL,\
           email VARCHAR(100),\
           telefono VARCHAR(100))")
