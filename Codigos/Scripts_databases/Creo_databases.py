@@ -7,6 +7,7 @@ def crear_db(name="academia"):
 
     try:
         cursor.execute("CREATE DATABASE {}".format(name))
+        db.commit()
     except Exception as e:
         if str(e.args[0]) == str(1007):
             print("La base de datos academia ya estaba creada")
@@ -28,6 +29,7 @@ def crear_tabla_usuarios(db):
           username VARCHAR(100) NOT NULL UNIQUE,\
           password VARCHAR(100) NOT NULL,\
           privilegios INTEGER NOT NULL)")
+        db.commit()
 
         print("La tabla Usuarios fue creada correctamente")
     except Exception as e:
@@ -45,6 +47,7 @@ def crear_root(db):
           (username, password, privilegios)\
           VALUES('root', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', 1)")
         print("El usuairo root se inserto correctamente")
+        db.commit()
     except Exception as e:
         if str(e.args[0]) == str(1062):
             print("El usuario root ya esta creado")
@@ -64,6 +67,7 @@ def crear_tabla_alumnos(db):
           DNI int not null,\
           Email VARCHAR(100),\
           Telefono VARCHAR(100))")
+        db.commit()
 
         print("La tabla Alumnos fue creada correctamente")
     except Exception as e:
@@ -85,6 +89,7 @@ def crear_tabla_docentes(db):
            dni INT NOT NULL,\
            email VARCHAR(100),\
            telefono VARCHAR(100))")
+        db.commit()
 
         print("La tabla Docentes fue creada correctamente")
     except Exception as e:
@@ -102,6 +107,7 @@ def crear_tabla_niveles(db):
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
            nivel VARCHAR(100) NOT NULL,\
            porcentaje_docente INTEGER)")
+        db.commit()
 
         print("La tabla Nivel fue creada correctamente")
     except Exception as e:
@@ -119,6 +125,7 @@ def crear_tabla_materias(db):
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
           materia VARCHAR(100) NOT NULL,\
           id_nivel INT REFERENCES nivel(id))")
+        db.commit()
 
         print("La tabla Materias fue creada correctamente")
     except Exception as e:
@@ -136,6 +143,7 @@ def crear_tabla_aulas(db):
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
            nombre VARCHAR(100) NOT NULL,\
            club_de_la_tarea BOOLEAN NOT NULL)")
+        db.commit()
 
         print("La tabla Aulas fue creada correctamente")
     except Exception as e:
@@ -153,6 +161,7 @@ def crear_tabla_docente_materia(db):
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
            id_mat INTEGER REFERENCES materias(id),\
            id_doc INTEGER REFERENCES docentes(id))")
+        db.commit()
 
         print("La tabla Docentes_y_Materias fue creada correctamente")
     except Exception as e:
@@ -169,6 +178,7 @@ def crear_tabla_clase_paquete(db):
         cursor.execute("CREATE TABLE cant_clas_por_paquete\
           (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
            cantidad INTEGER NOT NULL)")
+        db.commit()
 
         print("La tabla Cant_clas_por_paquete fue creada correctamente")
     except Exception as e:
@@ -188,6 +198,7 @@ def crear_tabla_costo_clase(db):
         particular BOOLEAN NOT NULL,\
         costo_total INTEGER,\
         costo_unitario INTEGER)")
+        db.commit()
 
         print("La tabla Costo_clase fue creada correctamente")
     except Exception as e:
@@ -209,6 +220,7 @@ def crear_tabla_clases(db):
         id_costo_clases INTEGER REFERENCES costo_clase(id),\
         reprogramo BOOLEAN,\
         horario VARCHAR(100))")
+        db.commit()
 
         print("La tabla clases fue creada correctamente")
     except Exception as e:
@@ -227,6 +239,7 @@ def crear_tabla_alumnos_clases(db):
         id_alumno INTEGER REFERENCES alumnos(id),\
         id_clase INTEGER REFERENCES clases(id),\
         asistio BOOLEAN)")
+        db.commit()
 
         print("La tabla alumnos_y_clases fue creada correctamente")
     except Exception as e:
@@ -276,17 +289,20 @@ def crear_tablas():
     # Crear tabla ALUMNOS-CLASES
     crear_tabla_alumnos_clases(db)
 
+
 def eliminar_db(name):
     db = mysql.connector.connect(user='root', password='root', host='127.0.0.1')
     cursor = db.cursor()
 
     try:
         cursor.execute("DROP DATABASE {}".format(name))
+        db.commit()
     except Exception as e:
         if str(e.args[0]) == str(1007):
             print("La base de datos '{}' no existe o no se pudo eliminar".format(name))
         else:
             print(e)
+
 
 class ErrorCrearTabla(Exception):
     def __str__(self):
@@ -296,4 +312,7 @@ class ErrorCrearTabla(Exception):
 if __name__ == "__main__":
     crear_tablas()
     #eliminar_db("academia")
+
+
+
 
