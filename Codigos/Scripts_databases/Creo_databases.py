@@ -1,12 +1,12 @@
 import mysql.connector
 
 
-def crear_db():
+def crear_db(name="academia"):
     db = mysql.connector.connect(user='root', password='root', host='127.0.0.1')
     cursor = db.cursor()
 
     try:
-        cursor.execute("CREATE DATABASE academia")
+        cursor.execute("CREATE DATABASE {}".format(name))
     except Exception as e:
         if str(e.args[0]) == str(1007):
             print("La base de datos academia ya estaba creada")
@@ -14,7 +14,7 @@ def crear_db():
             print(e)
 
     db.close()
-    db = mysql.connector.connect(user='root',password='root',host='127.0.0.1', database='academia')
+    db = mysql.connector.connect(user='root',password='root',host='127.0.0.1', database=name)
 
     return db
 
@@ -276,6 +276,17 @@ def crear_tablas():
     # Crear tabla ALUMNOS-CLASES
     crear_tabla_alumnos_clases(db)
 
+def eliminar_db(name):
+    db = mysql.connector.connect(user='root', password='root', host='127.0.0.1')
+    cursor = db.cursor()
+
+    try:
+        cursor.execute("DROP DATABASE {}".format(name))
+    except Exception as e:
+        if str(e.args[0]) == str(1007):
+            print("La base de datos '{}' no existe o no se pudo eliminar".format(name))
+        else:
+            print(e)
 
 class ErrorCrearTabla(Exception):
     def __str__(self):
@@ -284,3 +295,5 @@ class ErrorCrearTabla(Exception):
 
 if __name__ == "__main__":
     crear_tablas()
+    #eliminar_db("academia")
+
