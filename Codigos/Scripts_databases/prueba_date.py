@@ -9,10 +9,13 @@ cursor = db.cursor()
 
 dt = datetime.datetime(2016, 7, 6, 14, 00)
 print (dt)
-
+'''
 cursor.execute("insert into fecha\
 (fecha_y_hora)\
-value('{}')".format(dt))
+value('{}')".format(dt))'''
+
+fecha=datetime.date(2016,7,6)
+print (fecha)
 
 db.commit()
 
