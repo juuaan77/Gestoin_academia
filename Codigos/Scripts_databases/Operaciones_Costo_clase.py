@@ -36,28 +36,6 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     except Exception as e:
         print("Error al insertar el costo, en el metodo agregar_costo -> " + str(e))
 
-
-def eliminar_costo(db,key):
-
-    # Primero obtengo el cursor de la db
-    try:
-        cursor = db.cursor()
-        print("la base de datos se abrio correctamente")
-        cursor.execute("PRAGMA foreign_keys = ON")
-        db.commit()
-    except Exception as e:
-        print("Error al abrir la base de datos, en el metodo eliminar_costo ->" + str(e))
-
-    #Elimino el alumno correspondiente a la key dada.
-    try:
-        cursor.execute("DELETE FROM costo_clase where ID_costo_clase=?",(key,))
-        print("El costo se elimino correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al eliminar un costo, en el metodo eliminar_costo -> " + str(e))
-
-
 def actualizo_costo(db,key,costo_total):
     # Primero obtengo el cursor de la db
     try:
@@ -91,7 +69,6 @@ def actualizo_costo(db,key,costo_total):
         db.commit()
     except Exception as e:
         print("Error al actualizar un costo, en el metodo actualizo_costo -> " + str(e))
-
 
 if __name__ == "__main__":
     database = sqlite3.connect('..\\..\\Databases\\Academia.db')

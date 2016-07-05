@@ -20,47 +20,6 @@ def agregar_docente(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
     except Exception as e:
         print("Error al insertar un docente, en el metodo agregar_docente -> " + str(e))
 
-def eliminar_docente(db,key):
-    # Primero obtengo el cursor de la db
-    cursor = obtengo_cursor(db)
-
-    #Elimino el alumno correspondiente a la key dada.
-    try:
-        cursor.execute("DELETE FROM docentes where ID_docentes=?",(key,))
-        print("El docente se elimino correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al eliminar un docente, en el metodo eliminar_docente -> " + str(e))
-
-
-def actualizo_email_docente(db,key,email):
-    # Primero obtengo el cursor de la db
-    cursor = obtengo_cursor(db)
-
-    # Actualizo el email del alumno correspondiente a la key dada.
-    try:
-        cursor.execute("UPDATE docentes set email=? where ID_docentes=?", (email,key,))
-        print("El email del docente se actualizo correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al actualizar el email de un docente, en el metodo actualizo_email_docente -> " + str(e))
-
-
-def actualizo_telefono_docente(db,key,telefono):
-    # Primero obtengo el cursor de la db
-    cursor = obtengo_cursor(db)
-
-    # Actualizo el email del alumno correspondiente a la key dada.
-    try:
-        cursor.execute("UPDATE docentes set telefono=? where ID_docentes=?", (telefono,key,))
-        print("El telefono del docente se actualizo correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al actualizar el telefono de un docente, en el metodo actualizo_telefono_docente -> " + str(e))
-
 def obtener_docente_por_nombre(db,apellido):
     # Primero obtengo el cursor de la db
     cursor = obtengo_cursor(db)
