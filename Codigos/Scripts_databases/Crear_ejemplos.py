@@ -1,5 +1,14 @@
 import mysql.connector
-from Operaciones_aulas import agregar_aula
+from Codigos.Scripts_databases.Operaciones_aulas import *
+from Codigos.Scripts_databases.Operaciones_alumnos import *
+from Codigos.Scripts_databases.Operaciones_nivel import *
+from Codigos.Scripts_databases.Operaciones_materias import *
+from Codigos.Scripts_databases.Operaciones_cant_clas_por_paquete import *
+from Codigos.Scripts_databases.Operaciones_Costo_clase import *
+from Codigos.Scripts_databases.Operaciones_Docentes import *
+from Codigos.Scripts_databases.Operaciones_docentes_y_materias import *
+from Codigos.Scripts_databases.Operaciones_clases import *
+from Codigos.Scripts_databases.Operaciones_Alumnos_y_clases import *
 
 def inserto_datos_ejemplo():
     try:
@@ -7,8 +16,8 @@ def inserto_datos_ejemplo():
         print("Conexion exitosa al servidor de base de datos")
     except Exception as e:
         print(e)
-
-    #Primero inserto 4 aulas, fonoaudiologia y cocina.
+    '''
+    Primero inserto 4 aulas, fonoaudiologia y cocina.
     agregar_aula(database, "Aula 1",False)
     agregar_aula(database, "Aula 2", False)
     agregar_aula(database, "Aula 3", False)
@@ -16,6 +25,46 @@ def inserto_datos_ejemplo():
     agregar_aula(database, "Fonoaudiologia", False)
     agregar_aula(database, "Cocina", False)
 
+    agregar_alumno(database,"Juan","Arese","18/08/1992",36935267,"juan_arese@hotmail.com","3564-524759")
+    agregar_alumno(database, "Arian", "Giles Garcia", "13/07/1991", 36201187, "arian2822@gmail.com", "2923-440464")
+    agregar_alumno(database, "Pablo", "Galarza", "17/08/1992", 36935282, "pablo_galarza@hotmail.com", "3564-525252")
 
+    agregar_nivel(database, "Primario",10)
+    agregar_nivel(database, "Secundario", 20)
+    agregar_nivel(database, "Terciario", 30)
+    agregar_nivel(database, "Universitario", 40)
+
+    agregar_materia(database, "Fisica", 1)
+    agregar_materia(database, "Matematica", 2)
+    agregar_materia(database, "Informatica", 3)
+    agregar_materia(database, "Arquitectura de computadoras", 4)
+
+    agregar_paquete(database, 1)
+    agregar_paquete(database, 2)
+    agregar_paquete(database, 4)
+    agregar_paquete(database, 8)
+    agregar_paquete(database, 12)
+
+    agregar_costo(database, 1, True, 200)
+    agregar_costo(database, 2, True, 350)
+    agregar_costo(database, 3, True, 650)
+    agregar_costo(database, 1, False, 100)
+    agregar_costo(database, 2, False, 250)
+
+    agregar_docente(database, "Gerardo", "Morelli", "24/04/1954", 15789685, "Gerardo.moreli@gmail.com", "351-545859")
+    agregar_docente(database, "Orlando", "Micolini", "15/05/1965", 17779685, "Orlando.micolini@gmail.com", "351-748596")
+    agregar_docente(database, "daniel", "Joaquin", "12/08/1970", 19789685, "Daniel.Joaquin@gmail.com", "351-124578")
+
+    agregar_docente_y_materia(database, 13, 1)
+    agregar_docente_y_materia(database, 16, 2)
+    agregar_docente_y_materia(database, 14, 3)
+
+    agregar_clase(database, 1, 13, 2, 1, False, "Miercoles 06/07 14hs")
+    agregar_clase(database, 2, 16, 3, 1, False, "jueves 07/07 14hs")
+
+    agregar_alumno_y_clase(database, 1, 1)
+    agregar_alumno_y_clase(database, 2, 1)
+    agregar_alumno_y_clase(database, 3, 2)
+    '''
 if __name__ == "__main__":
     inserto_datos_ejemplo()

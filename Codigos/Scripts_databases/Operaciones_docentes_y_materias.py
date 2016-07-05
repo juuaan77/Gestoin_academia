@@ -6,8 +6,6 @@ def agregar_docente_y_materia(db,id_materia,id_docente):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
-        cursor.execute("PRAGMA foreign_keys = ON")
-        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_docente_y_materia ->"+str(e))
 

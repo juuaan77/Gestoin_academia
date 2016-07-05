@@ -7,8 +7,6 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
-        cursor.execute("PRAGMA foreign_keys = ON")
-        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_costo ->"+str(e))
 
@@ -16,7 +14,7 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     try:
         cursor.execute("select cantidad\
         from Cant_clas_por_paquete\
-        where `ID_cant_clas_por_paquete` = {}".format(id_cant_clases))
+        where ID = {}".format(id_cant_clases))
         #Parceo la info obtenida en la consulta
         for i in cursor:
             cantidad = i[0]
@@ -72,4 +70,5 @@ def actualizo_costo(db,key,costo_total):
 
 if __name__ == "__main__":
     database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
+    #agregar_costo(database, 1, True, 200)
     database.close()

@@ -6,14 +6,11 @@ def agregar_docente(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
     ##Primero obtengo el cursor de la db
     cursor = obtengo_cursor(db)
 
-    #Genero un arreglo con los datos a insertar
-    valores = [nombre,apellido,fecha_nacimiento,dni,email,telefono]
-
     #Inserto un nuevo docente con los parametros dados.
     try:
         cursor.execute("INSERT INTO docentes\
           (Nombre,Apellido, fecha_nacimiento, DNI, Email, Telefono)\
-          VALUES('{}','{}','{}',{},'{}','{}')".format(valores))
+          VALUES('{}','{}','{}',{},'{}','{}')".format(nombre,apellido,fecha_nacimiento,dni,email,telefono))
         print("El docente se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()

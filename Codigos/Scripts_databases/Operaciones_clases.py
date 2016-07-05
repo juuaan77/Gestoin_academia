@@ -7,15 +7,13 @@ def agregar_clase(db,id_docente,id_materia,id_aula,id_costo_clase,reprogramo,hor
     try:
         cursor = db.cursor()
         print("la base de datos se abrio correctamente")
-        cursor.execute("PRAGMA foreign_keys = ON")
-        db.commit()
     except Exception as e:
         print("Error al abrir la base de datos, en el metodo agregar_clase ->"+str(e))
 
     #Inserto un nuevo docente con los parametros dados.
     try:
         cursor.execute("INSERT INTO clases\
-          (id_docente,id_materia,id_aula,reprogramo,horario)\
+          (id_docente,id_materia,id_aula,id_costo_clases,reprogramo,horario)\
           VALUES({},{},{},{},{},'{}')".format(id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario))
         print("La clase se inserto correctamente")
         # Comiteo los cambios a la base de datos.

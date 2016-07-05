@@ -6,14 +6,11 @@ def agregar_alumno(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
     #Primero obtengo el cursor de la db
     cursor = obtengo_cursor(db)
 
-    #Genero un arreglo con los datos a insertar
-    valores = [nombre,apellido,fecha_nacimiento,dni,email,telefono]
-
     #Inserto un nuevo alumno con los parametros dados.
     try:
         cursor.execute("INSERT INTO alumnos\
-          (Nombre_y_Apellido, fecha_nacimiento, DNI, Email, Telefono)\
-          VALUES('{}','{}','{}',{},'{}','{}')".format(valores))
+          (Nombre,Apellido, fecha_nacimiento, DNI, Email, Telefono)\
+          VALUES('{}','{}','{}',{},'{}','{}')".format(nombre,apellido,fecha_nacimiento,dni,email,telefono))
         print("El alumno se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -56,5 +53,6 @@ def obtener_alumnos_por_dni(db,dni):
 
 if __name__ == "__main__":
     database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
+    #agregar_alumno(database, "Juan", "Arese", "18/08/1992", 36935267, "juan_arese@hotmail.com", "3564-524759")
     database.close()
 
