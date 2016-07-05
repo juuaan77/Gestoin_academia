@@ -59,14 +59,14 @@ def crear_tabla_alumnos(db):
     cursor = db.cursor()
 
     try:
-        cursor.execute("create table Alumnos\
-          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
-          Nombre VARCHAR(100) not null,\
-          Apellido VARCHAR(100) not null,\
-          Fecha_nacimiento VARCHAR(100),\
-          DNI int not null,\
-          Email VARCHAR(100),\
-          Telefono VARCHAR(100))")
+        cursor.execute("CREATE TABLE alumnos\
+          (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          nombre VARCHAR(100) NOT NULL,\
+          apellido VARCHAR(100) NOT NULL,\
+          fecha_nacimiento DATE NOT NULL),\
+          dni INTEGER NOT NULL,\
+          email VARCHAR(100),\
+          telefono VARCHAR(100))")
         db.commit()
 
         print("La tabla Alumnos fue creada correctamente")
@@ -82,10 +82,10 @@ def crear_tabla_docentes(db):
 
     try:
         cursor.execute("CREATE TABLE docentes\
-          (ID INTEGER PRIMARY KEY AUTO_INCREMENT,\
+          (id INTEGER PRIMARY KEY AUTO_INCREMENT,\
            nombre VARCHAR(100) NOT NULL,\
            apellido VARCHAR(100) NOT NULL,\
-           fecha_nacimiento VARCHAR(100),\
+           fecha_nacimiento DATE NOT NULL,\
            dni INT NOT NULL,\
            email VARCHAR(100),\
            telefono VARCHAR(100))")
@@ -219,7 +219,7 @@ def crear_tabla_clases(db):
         id_aula INTEGER REFERENCES aulas(ID),\
         id_costo_clases INTEGER REFERENCES costo_clase(id),\
         reprogramo BOOLEAN,\
-        horario VARCHAR(100))")
+        horario DATETIME)")
         db.commit()
 
         print("La tabla clases fue creada correctamente")
@@ -311,7 +311,6 @@ class ErrorCrearTabla(Exception):
 
 if __name__ == "__main__":
     crear_tablas()
-    #eliminar_db("academia")
 
 
 
