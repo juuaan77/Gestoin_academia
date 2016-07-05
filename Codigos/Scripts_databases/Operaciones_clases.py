@@ -16,7 +16,7 @@ def agregar_clase(db,id_docente,id_materia,id_aula,id_costo_clase,reprogramo,hor
     try:
         cursor.execute("INSERT INTO clases\
           (id_docente,id_materia,id_aula,reprogramo,horario)\
-          VALUES(?,?,?,?,?,?)",(id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario,))
+          VALUES({},{},{},{},{},'{}')".format(id_docente,id_materia,id_aula,id_costo_clase,reprogramo,horario))
         print("La clase se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -44,11 +44,5 @@ def actualizo_reprogramo(db,key,horario):
         print("Error al reprogramar la clase, en el metodo actualizo_reprogramo -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    #agregar_clase(database,1,1,5,False,"a las 3")
-    #agregar_clase(database, 1, 1, 5, False, "a las 5")
-    #eliminar_clase(database,1)
-    #actualizo_aula_de_clase(database,2,6)
-    #actualizo_docente_de_clase(database,2,2)
-    #actualizo_reprogramo(database,2,"a las 9")
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

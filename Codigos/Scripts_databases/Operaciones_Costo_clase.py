@@ -16,7 +16,7 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     try:
         cursor.execute("select cantidad\
         from Cant_clas_por_paquete\
-        where `ID_cant_clas_por_paquete` = ?",(id_cant_clases,))
+        where `ID_cant_clas_por_paquete` = {}".format(id_cant_clases))
         #Parceo la info obtenida en la consulta
         for i in cursor:
             cantidad = i[0]
@@ -29,7 +29,7 @@ def agregar_costo(db,id_cant_clases,particular,costo_total):
     try:
         cursor.execute("INSERT INTO costo_clase\
           (ID_cant_clas,particular,costo_total,costo_unitario)\
-          VALUES(?,?,?,?)",(id_cant_clases,particular,costo_total,costo_total/cantidad))
+          VALUES({},{},{},{})".format(id_cant_clases,particular,costo_total,costo_total/cantidad))
         print("El costo se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -71,9 +71,5 @@ def actualizo_costo(db,key,costo_total):
         print("Error al actualizar un costo, en el metodo actualizo_costo -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    #agregar_costo(database,2,True,200)
-    #agregar_costo(database, 2, False, 100)
-    #eliminar_costo(database,1)
-    #actualizo_costo(database,4,400)
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

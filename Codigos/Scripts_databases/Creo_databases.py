@@ -1,9 +1,5 @@
 import mysql.connector
 
-class ErrorCrearTabla(Exception):
-    def __str__(self):
-        return "No se pudo crear la tabla, verifique las direcciones de las carpetas"
-
 def Creo_databases():
     #Primero creo la base de datos.
     database = mysql.connector.connect(user='root',password='root',host='127.0.0.1')

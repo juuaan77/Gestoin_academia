@@ -15,7 +15,7 @@ def agregar_docente_y_materia(db,id_materia,id_docente):
     try:
         cursor.execute("INSERT INTO docentes_y_materias\
           (id_mat,id_doc)\
-          VALUES(?,?)",(id_materia,id_docente ,))
+          VALUES({},{})".format(id_materia,id_docente))
         print("El docente y la materia se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -23,8 +23,5 @@ def agregar_docente_y_materia(db,id_materia,id_docente):
         print("Error al insertar docente y la materia, en el metodo agregar_docente_y_materia -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    #agregar_docente_y_materia(database,1,1)
-    #agregar_docente_y_materia(database, 1, 1)
-    eliminar_docente_y_materia(database,1)
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

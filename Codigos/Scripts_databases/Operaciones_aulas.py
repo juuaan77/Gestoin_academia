@@ -13,8 +13,8 @@ def agregar_aula(db,nombre,club_de_la_tarea):
     #Inserto un nuevo docente con los parametros dados.
     try:
         cursor.execute("INSERT INTO aulas\
-          (nombre,club_de_la_tarea)\
-          VALUES(?,?)",(nombre,club_de_la_tarea ,))
+            (nombre,club_de_la_tarea)\
+            VALUES('{}',{})".format(nombre, club_de_la_tarea))
         print("El aula se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -22,10 +22,6 @@ def agregar_aula(db,nombre,club_de_la_tarea):
         print("Error al insertar aula, en el metodo agregar_aula -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-
-    #agregar_aula(database,"aula1",False)
-    #agregar_aula(database,"cocina",True)
-    #eliminar_aula(database,1)
-    #actualizo_aula_y_club_de_la_tarea(database,2,"fonoaudiologia",False)
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
+    agregar_aula(database, "Aula 1", False)
     database.close()

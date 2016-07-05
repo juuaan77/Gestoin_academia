@@ -14,7 +14,7 @@ def agregar_nivel(db,nivel,porcentaje_docente):
     try:
         cursor.execute("INSERT INTO nivel\
           (Nivel,Porcentaje_docente)\
-          VALUES(?,?)",(nivel,porcentaje_docente,))
+          VALUES('{}',{})".format(nivel,porcentaje_docente,))
         print("El nivel se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -22,5 +22,5 @@ def agregar_nivel(db,nivel,porcentaje_docente):
         print("Error al insertar un nivel, en el metodo agregar_nivel -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

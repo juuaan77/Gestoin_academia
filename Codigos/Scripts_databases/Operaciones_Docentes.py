@@ -12,8 +12,8 @@ def agregar_docente(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
     #Inserto un nuevo docente con los parametros dados.
     try:
         cursor.execute("INSERT INTO docentes\
-          (Nombre_y_Apellido, fecha_nacimiento, DNI, Email, Telefono)\
-          VALUES(?,?,?,?,?,?)",valores)
+          (Nombre,Apellido, fecha_nacimiento, DNI, Email, Telefono)\
+          VALUES('{}','{}','{}',{},'{}','{}')".format(valores))
         print("El docente se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -55,10 +55,6 @@ def obtener_docente_por_dni(db,dni):
         print("Error al obtener alumnos por apellidos -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    agregar_docente(database,"juan arese","el 18 de agosto",36935267,"juan_arese@hotmail.com","3564524759")
-    #eliminar_docente(database,1)
-    #actualizo_email_docente(database,1,"fruta")
-    #actualizo_telefono_docente(database,1,6667)
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()
 

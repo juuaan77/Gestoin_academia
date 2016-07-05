@@ -16,7 +16,7 @@ def agregar_materia(db,materia,id_nivel):
     try:
         cursor.execute("INSERT INTO materias\
           (materia,ID_nivel)\
-          VALUES(?,?)",(materia,id_nivel,))
+          VALUES('{}',{})".format(materia,id_nivel,))
         print("La materia se inserto correctamente")
         db.commit()
     except Exception as e:
@@ -25,5 +25,5 @@ def agregar_materia(db,materia,id_nivel):
     #Comiteo los cambios a la base de datos.
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()

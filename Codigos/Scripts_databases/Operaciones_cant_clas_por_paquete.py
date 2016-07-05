@@ -14,7 +14,7 @@ def agregar_paquete(db,cantidad):
     try:
         cursor.execute("INSERT INTO cant_clas_por_paquete\
           (cantidad)\
-          VALUES(?)",(cantidad,))
+          VALUES({})".format(cantidad))
         print("El paquete se inserto correctamente")
         # Comiteo los cambios a la base de datos.
         db.commit()
@@ -22,9 +22,5 @@ def agregar_paquete(db,cantidad):
         print("Error al insertar un paquete, en el metodo agregar_paquete -> " + str(e))
 
 if __name__ == "__main__":
-    database = sqlite3.connect('..\\..\\Databases\\Academia.db')
-    #agregar_paquete(database,1)
-    #agregar_paquete(database,4)
-    #eliminar_paquete(database,1)
-    #actualizo_paquete(database,2,8)
+    database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
     database.close()
