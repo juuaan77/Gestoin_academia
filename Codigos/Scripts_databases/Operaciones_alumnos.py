@@ -20,32 +20,6 @@ def agregar_alumno(db,nombre,apellido,fecha_nacimiento,dni,email,telefono):
     except Exception as e:
         print("Error al insertar un alumno, en el metodo agregar_alumno -> " + str(e))
 
-def actualizo_email_alumno(db,key,email):
-    # Primero obtengo el cursor de la db
-    cursor = obtengo_cursor(db)
-
-    # Actualizo el email del alumno correspondiente a la key dada.
-    try:
-        cursor.execute("UPDATE alumnos set email=? where ID_alumnos=?", (email,key,))
-        print("El email del alumno se actualizo correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al actualizar el email de un alumno, en el metodo actualizo_email_alumno -> " + str(e))
-
-def actualizo_telefono_alumno(db,key,telefono):
-    # Primero obtengo el cursor de la db
-    cursor = obtengo_cursor(db)
-
-    # Actualizo el email del alumno correspondiente a la key dada.
-    try:
-        cursor.execute("UPDATE alumnos set telefono=? where ID_alumnos=?", (telefono,key,))
-        print("El telefono del alumno se actualizo correctamente")
-        # Comiteo los cambios a la base de datos.
-        db.commit()
-    except Exception as e:
-        print("Error al actualizar el telefono de un alumno, en el metodo actualizo_telefono_alumno -> " + str(e))
-
 def obtener_alumnos_por_nombre(db,apellido):
     # Primero obtengo el cursor de la db
     cursor = obtengo_cursor(db)
