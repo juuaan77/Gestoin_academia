@@ -18,6 +18,7 @@ def agregar_alumno(db, nombre, apellido, fecha_nacimiento, dni, email, telefono)
     except Exception:
         raise ErrorAgregarAlumno
 
+
 def obtener_alumnos_por_nombre(db,apellido):
     # Primero obtengo el cursor de la db
     cursor = obtengo_cursor(db)
@@ -70,6 +71,6 @@ class ErrorAlumnoPorDNI(Exception):
 
 if __name__ == "__main__":
     database = mysql.connector.connect(user='root', password='root', host='127.0.0.1',database='academia')
-    #agregar_alumno(database, "Juan", "Arese", "18/08/1992", 36935267, "juan_arese@hotmail.com", "3564-524759")
+    # agregar_alumno(database, "Juan", "Arese", "18/08/1992", 36935267, "juan_arese@hotmail.com", "3564-524759")
     database.close()
 
