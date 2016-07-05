@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector,datetime
 from Codigos.Scripts_databases.Operaciones_aulas import *
 from Codigos.Scripts_databases.Operaciones_alumnos import *
 from Codigos.Scripts_databases.Operaciones_nivel import *
@@ -25,9 +25,12 @@ def inserto_datos_ejemplo():
     agregar_aula(database, "Fonoaudiologia", False)
     agregar_aula(database, "Cocina", False)
 
-    agregar_alumno(database,"Juan","Arese","18/08/1992",36935267,"juan_arese@hotmail.com","3564-524759")
-    agregar_alumno(database, "Arian", "Giles Garcia", "13/07/1991", 36201187, "arian2822@gmail.com", "2923-440464")
-    agregar_alumno(database, "Pablo", "Galarza", "17/08/1992", 36935282, "pablo_galarza@hotmail.com", "3564-525252")
+    fecha=datetime.date(1992,8,18)
+    agregar_alumno(database,"Juan","Arese",str(fecha),36935267,"juan_arese@hotmail.com","3564-524759")
+    fecha=datetime.date(1991,8,18)
+    agregar_alumno(database, "Arian", "Giles Garcia", str(fecha), 36201187, "arian2822@gmail.com", "2923-440464")
+    fecha=datetime.date(1992,8,17)
+    agregar_alumno(database, "Pablo", "Galarza", str(fecha), 36935282, "pablo_galarza@hotmail.com", "3564-525252")
 
     agregar_nivel(database, "Primario",10)
     agregar_nivel(database, "Secundario", 20)
@@ -51,16 +54,21 @@ def inserto_datos_ejemplo():
     agregar_costo(database, 1, False, 100)
     agregar_costo(database, 2, False, 250)
 
-    agregar_docente(database, "Gerardo", "Morelli", "24/04/1954", 15789685, "Gerardo.moreli@gmail.com", "351-545859")
-    agregar_docente(database, "Orlando", "Micolini", "15/05/1965", 17779685, "Orlando.micolini@gmail.com", "351-748596")
-    agregar_docente(database, "daniel", "Joaquin", "12/08/1970", 19789685, "Daniel.Joaquin@gmail.com", "351-124578")
+    fecha=datetime.date(1954,4,24)
+    agregar_docente(database, "Gerardo", "Morelli", str(fecha), 15789685, "Gerardo.moreli@gmail.com", "351-545859")
+    fecha=datetime.date(1965,5,15)
+    agregar_docente(database, "Orlando", "Micolini", str(fecha), 17779685, "Orlando.micolini@gmail.com", "351-748596")
+    fecha=datetime.date(1970,8,12)
+    agregar_docente(database, "daniel", "Joaquin", str(fecha), 19789685, "Daniel.Joaquin@gmail.com", "351-124578")
 
     agregar_docente_y_materia(database, 13, 1)
     agregar_docente_y_materia(database, 16, 2)
     agregar_docente_y_materia(database, 14, 3)
 
-    agregar_clase(database, 1, 13, 2, 1, False, "Miercoles 06/07 14hs")
-    agregar_clase(database, 2, 16, 3, 1, False, "jueves 07/07 14hs")
+    dt = datetime.datetime(2016, 7, 6, 14, 00)
+    agregar_clase(database, 1, 13, 2, 1, False, str(dt))
+    dt = datetime.datetime(2016, 7, 7, 14, 00)
+    agregar_clase(database, 2, 16, 3, 1, False, str(dt))
 
     agregar_alumno_y_clase(database, 1, 1)
     agregar_alumno_y_clase(database, 2, 1)
