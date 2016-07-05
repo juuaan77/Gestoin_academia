@@ -13,7 +13,7 @@ class TestAutenticacion(unittest.TestCase):
         # Creo DB
         self.db = crear_db("test")
 
-         # Creo tabla USUARIOS utilizada para autenticación
+        # Creo tabla USUARIOS utilizada para autenticación
         crear_tabla_usuarios(self.db)
 
         # Creo usuario ROOT-ROOT en la tabla USUARIO
