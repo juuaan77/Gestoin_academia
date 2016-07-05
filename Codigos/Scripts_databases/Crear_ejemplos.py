@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector,datetime
 from Codigos.Scripts_databases.Operaciones_aulas import *
 from Codigos.Scripts_databases.Operaciones_alumnos import *
 from Codigos.Scripts_databases.Operaciones_nivel import *
@@ -59,8 +59,10 @@ def inserto_datos_ejemplo():
     agregar_docente_y_materia(database, 16, 2)
     agregar_docente_y_materia(database, 14, 3)
 
-    agregar_clase(database, 1, 13, 2, 1, False, "Miercoles 06/07 14hs")
-    agregar_clase(database, 2, 16, 3, 1, False, "jueves 07/07 14hs")
+    dt = datetime.datetime(2016, 7, 6, 14, 00)
+    agregar_clase(database, 1, 13, 2, 1, False, str(dt))
+    dt = datetime.datetime(2016, 7, 7, 14, 00)
+    agregar_clase(database, 2, 16, 3, 1, False, str(dt))
 
     agregar_alumno_y_clase(database, 1, 1)
     agregar_alumno_y_clase(database, 2, 1)
