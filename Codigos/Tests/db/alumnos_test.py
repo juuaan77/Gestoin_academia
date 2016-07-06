@@ -14,7 +14,7 @@ class TestAlumnos(unittest.TestCase):
         # Creo DB
         self.db = crear_db("test")
 
-        # Creo tabla ALUMNOS utilizada para autenticación
+        # Creo tabla ALUMNOS
         crear_tabla_alumnos(self.db)
 
     def tearDown(self):
