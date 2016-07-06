@@ -25,6 +25,16 @@ class TestAlumnosClases(unittest.TestCase):
     def test_1(self):
         self.assertTrue(agregar_alumno_y_clase(self.db, 1, 1))
 
-    # TEST 2: No poder agregar un alumno/clase a la tabla con parámetros incorrectos
+    # TEST 2: Que el aula agregado sea correctamente agregado a la DB
     def test_2(self):
+        agregar_alumno_y_clase(self.db, 1, 1)
+
+        cursor = self.db.cursor()
+        cursor.execute("SELECT count(*) FROM alumnos_y_clases")
+        count = cursor.fetchone()[0]
+
+        self.assertEqual(count, 1)
+
+    # TEST 3: No poder agregar un alumno/clase a la tabla con parámetros incorrectos
+    def test_3(self):
         self.assertRaises(ErrorAgregarAlumnoClase, agregar_alumno_y_clase, self.db, "asd", 1)
