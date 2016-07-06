@@ -7,7 +7,8 @@ from Codigos.Scripts_databases.Creo_databases import crear_tabla_alumnos
 
 from Codigos.Scripts_databases.Operaciones_alumnos import *
 
-class TestAutenticacion(unittest.TestCase):
+
+class TestAlumnos(unittest.TestCase):
 
     def setUp(self):
         # Creo DB
