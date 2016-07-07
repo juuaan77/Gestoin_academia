@@ -1,6 +1,6 @@
 import mysql.connector
 
-def agregar_costo(db,id_cant_clases,particular,costo_total):
+    def agregar_costo(db,id_cant_clases,particular,costo_total):
 
     #Primero obtengo el cursor de la db
 

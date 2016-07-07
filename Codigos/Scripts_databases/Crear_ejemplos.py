@@ -16,8 +16,8 @@ def inserto_datos_ejemplo():
         print("Conexion exitosa al servidor de base de datos")
     except Exception as e:
         print(e)
-    '''
-    Primero inserto 4 aulas, fonoaudiologia y cocina.
+
+    #Primero inserto 4 aulas, fonoaudiologia y cocina.
     agregar_aula(database, "Aula 1",False)
     agregar_aula(database, "Aula 2", False)
     agregar_aula(database, "Aula 3", False)
@@ -73,6 +73,6 @@ def inserto_datos_ejemplo():
     agregar_alumno_y_clase(database, 1, 1)
     agregar_alumno_y_clase(database, 2, 1)
     agregar_alumno_y_clase(database, 3, 2)
-    '''
+
 if __name__ == "__main__":
     inserto_datos_ejemplo()
